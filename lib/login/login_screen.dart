@@ -35,7 +35,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return Center(child: BlocBuilder<LoginBloc, LoginState>(
       bloc: widget.bloc,
       builder: (
         BuildContext context,
@@ -58,7 +58,7 @@ class LoginScreenState extends State<LoginScreen> {
           ),
         );
       },
-    );
+    ),);
   }
 
   void _load() {

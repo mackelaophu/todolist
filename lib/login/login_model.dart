@@ -7,7 +7,8 @@ class LoginModel {
   Future<String?> login(String username, String password) async {
     try {
       // 404
-      await dio.get('https://dart.dev');
+      var response =  await dio.get('https://dart.dev');
+      return response.data;
     } on DioException catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.

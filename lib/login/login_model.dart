@@ -1,51 +1,21 @@
-// ignore: depend_on_referenced_packages
-import 'package:equatable/equatable.dart';
+import 'dart:async';
 
-class LoginModel extends Equatable {
-  const LoginModel({
-    required this.name,
-  });
-  final String name;
+import 'package:dio/dio.dart';
 
-  @override
-  List<Object> get props => [ name];
-
-  Map<dynamic, dynamic> toMap() {
-    return {
-      'name': name,
-    };
-  }
-
-  static LoginModel? fromMap(Map<dynamic, dynamic>? map) {
-    if (map == null) {
-      return null;
+class LoginModel {
+  final dio = Dio();
+  Future<String?> login(String username, String password) async {
+    try {
+      // 404
+      await dio.get('https://dart.dev');
+    } on DioException catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        return e.message;
+      } else {
+        return "error on null";
+      }
     }
-
-    return LoginModel(
-      name: map['name']!.toString(),
-    );
-  }
-
-}
-
-class LoginViewModel extends Equatable {
-  const LoginViewModel({
-    // TODO(all): add all required constructor parameters
-    required this.items,
-  });
-
-  // TODO(all): declare your fields here
-  final List<LoginModel>? items;
-
-  @override
-  List<Object?> get props => [items /*TODO(all): List all fields here*/];
-
-  // TODO(all): implement copyWith
-  LoginViewModel copyWith({
-    List<LoginModel>? items,
-  }) {
-    return  LoginViewModel(
-        items: items ?? this.items,
-      );
   }
 }

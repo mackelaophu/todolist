@@ -1,15 +1,24 @@
-import 'package:ff_bloc/ff_bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
 
-import 'package:to_do_list/login/index.dart';
-
-class LoginState extends FFState<LoginState, LoginViewModel> {
-  const LoginState({
-    super.version = 0,
-    super.isLoading = false,
-    super.data,
-    super.error,
-  });
-
+sealed class LoginState extends Equatable {
+  const LoginState();
   @override
-  StateCopyFactory<LoginState, LoginViewModel> getCopyFactory() => LoginState.new;
+  List<Object> get props => [];
+}
+
+final class LoginInittialState extends LoginState {
+}
+final class LoginErrorState extends LoginState {
+  final Exception error;
+  const LoginErrorState({required this.error});
+}
+
+final class LoginLoadingState extends LoginState {
+  const LoginLoadingState();
+}
+
+final class LoginDismissLoadingState extends LoginState {
+  final String data;
+  const LoginDismissLoadingState({required this.data});
 }

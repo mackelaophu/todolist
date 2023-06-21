@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/login/index.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_list/login/login_bloc.dart';
+import 'package:to_do_list/login/login_model.dart';
+import 'package:to_do_list/login/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +36,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: BlocProvider(
+        create: (_) => LoginBloc(loginModel: LoginModel()),
+        child: const LoginPage(),
+      ),
     );
   }
 }
@@ -67,6 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return LoginPage(bloc: LoginBloc(provider: LoginProvider()));
+    return const LoginPage();
   }
 }

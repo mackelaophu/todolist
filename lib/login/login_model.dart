@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:to_do_list/login/login_response.dart';
 
 class LoginModel {
   final dio = Dio();
-  Future<dynamic?> login(String username, String password) async {
+  Future<dynamic> login(String username, String password) async {
     try {
       // 404
       var response =  await dio.post('http://127.0.0.1:3001/login',data:{"username":username,"password":password});

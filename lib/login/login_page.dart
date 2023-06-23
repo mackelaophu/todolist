@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/login/first_time_login.dart';
 import 'package:to_do_list/login/login_bloc.dart';
-import 'package:to_do_list/login/login_event.dart';
 
 import 'login_state.dart';
 
@@ -25,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: FirstTimeLogin(),
                 ),
               LoginLoadingState() => const CircularProgressIndicator(),
-              LoginDismissLoadingState() => Center(child: Text(state.data),),
+              LoginDismissLoadingState() => Center(child: Text(state.data.status),),
               LoginErrorState() => Center(child: Text("error: ${state.error.toString()}"),)
             },
           );

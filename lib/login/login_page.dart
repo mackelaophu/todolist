@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_list/login/first_time_login.dart';
 import 'package:to_do_list/login/login_bloc.dart';
 import 'package:to_do_list/login/login_event.dart';
 
@@ -20,12 +21,8 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context, state) {
           return Center(
             child: switch (state) {
-              LoginInittialState() => Center(
-                  child: TextButton(
-                
-                    onPressed: ()=> context.read<LoginBloc>().add(const LoginActionEvent()),
-                    child: const Text('TextButton'),
-                  ),
+              LoginInittialState() => const Center(
+                  child: FirstTimeLogin(),
                 ),
               LoginLoadingState() => const CircularProgressIndicator(),
               LoginDismissLoadingState() => Center(child: Text(state.data),),

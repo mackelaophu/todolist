@@ -18,6 +18,6 @@ final class LoginLoadingState extends LoginState {
 }
 
 final class LoginDismissLoadingState extends LoginState {
-  final String data;
+  final dynamic data;
   const LoginDismissLoadingState({required this.data});
 }

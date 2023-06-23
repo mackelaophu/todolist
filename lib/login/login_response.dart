@@ -10,10 +10,8 @@ class LoginEntity {
   factory LoginEntity.fromJson(Map<String, dynamic> json) => LoginEntity(
       status: json['status'], data: (json['data'] as List).cast<ToDoEntity>());
 
-  Map<String, dynamic> toJson() => _$LoginToDoToJson(this);
-  
-  Map<String, dynamic> _$LoginToDoToJson(LoginEntity instance) =>
-      <String, dynamic>{'id': instance.status, 'data': instance.data};
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'id': status, 'data': data};
 }
 
 @JsonSerializable()
@@ -34,12 +32,6 @@ class ToDoEntity {
       des: json['task'] as String,
       status: json['status'] as String);
 
-  Map<String, dynamic> toJson() => _$ToDoToJson(this);
-
-  Map<String, dynamic> _$ToDoToJson(ToDoEntity instance) => <String, dynamic>{
-        'id': instance.id,
-        'task': instance.task,
-        'des': instance.des,
-        'status': instance.status
-      };
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'id': id, 'task': task, 'des': des, 'status': status};
 }

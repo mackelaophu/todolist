@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:to_do_list/login/login_response.dart';
 
 sealed class LoginState extends Equatable {
   const LoginState();
@@ -18,6 +19,6 @@ final class LoginLoadingState extends LoginState {
 }
 
 final class LoginDismissLoadingState extends LoginState {
-  final dynamic data;
+  final LoginEntity data;
   const LoginDismissLoadingState({required this.data});
 }

@@ -11,8 +11,7 @@ class LoginModel {
     try {
       // 404
       var response =  await dio.post('http://127.0.0.1:3001/login',data:{"username":username,"password":password});
-      var entity = jsonDecode(response.data);
-      log(entity);
+      var entity = LoginEntity.fromJson(response.data);
       return entity;
     } on DioException catch (e) {
       // The request was made and the server responded with a status code

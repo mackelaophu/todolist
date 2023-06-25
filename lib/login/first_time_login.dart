@@ -21,50 +21,83 @@ class _FirstTimeLoginState extends State<FirstTimeLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber,
-      child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const Spacer(),
-              SizedBox(
-                  height: 150,
-                  child: Image.asset("assets/images/logonote.png")),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextFormField(
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your username',
-                  ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                ),
+    return Stack(
+      children: [
+        Container(
+          height: 350,
+          decoration: const ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(300),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your password',
-                  ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              _LoginButton(formKey: _formKey),
-              const Spacer()
-            ],
-          )),
+            ),
+            gradient: LinearGradient(
+              colors: <Color>[
+                Color.fromARGB(255, 253, 173, 14),
+                Color.fromARGB(255, 195, 105, 15),
+              ],
+            ),
+          ),
+        ),
+        FirstTimeLoginWidget(formKey: _formKey),
+      ],
     );
+  }
+}
+
+class FirstTimeLoginWidget extends StatelessWidget {
+  const FirstTimeLoginWidget({
+    super.key,
+    required GlobalKey<FormState> formKey,
+  }) : _formKey = formKey;
+
+  final GlobalKey<FormState> _formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const Spacer(),
+            SizedBox(
+                height: 150, child: Image.asset("assets/images/logonote.png")),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: const InputDecoration(
+                  hintText: 'Enter your username',
+                ),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Enter your password',
+                ),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            _LoginButton(formKey: _formKey),
+            const Spacer()
+          ],
+        ));
   }
 }
 
@@ -96,7 +129,9 @@ class _LoginButton extends StatelessWidget {
             // Validate will return true if the form is valid, or false if
             // the form is invalid.
             if (_formKey.currentState!.validate()) {
-              context.read<LoginBloc>().add(const LoginActionEvent());
+              context.read<LoginBloc>().add(
+                    const LoginActionEvent(),
+                  );
             }
           },
           child: const Text('Login'),

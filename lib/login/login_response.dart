@@ -7,8 +7,18 @@ class LoginEntity {
   final List<ToDoEntity> data;
   LoginEntity({required this.status, required this.data});
 
-  factory LoginEntity.fromJson(Map<String, dynamic> json) => LoginEntity(
-      status: json['status'], data: (json['data'] as List).cast<ToDoEntity>());
+  factory LoginEntity.fromJson(Map<String, dynamic> json) {
+    var list = json['data'] as List<dynamic>;
+    var temp = <ToDoEntity>[];
+
+    for (final element in list) {
+      final item = ToDoEntity.fromJson(element);
+      temp.add(item);
+    }
+
+    var entity = LoginEntity(status: json['status'], data: temp);
+    return entity;
+  }
 
   Map<String, dynamic> toJson() =>
       <String, dynamic>{'id': status, 'data': data};

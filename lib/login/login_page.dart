@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_list/home/home_page.dart';
 import 'package:to_do_list/login/first_time_login.dart';
 import 'package:to_do_list/login/login_bloc.dart';
 
@@ -16,19 +17,32 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<LoginBloc, LoginState>(
-        builder: (context, state) {
-          return Center(
-            child: switch (state) {
-              LoginInittialState() => const Center(
-                  child: FirstTimeLogin(),
-                ),
-              LoginLoadingState() => const CircularProgressIndicator(),
-              LoginDismissLoadingState() => Center(child: Text(state.data.status),),
-              LoginErrorState() => Center(child: Text("error: ${state.error.toString()}"),)
-            },
-          );
+      body: BlocListener<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state is LoginDismissLoadingState) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => HomePage(loginEntity: state.data),
+                fullscreenDialog: true));
+          }
         },
+        child: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            return Stack(
+              children: [
+                const FirstTimeLogin(),
+                if (state is LoginLoadingState) ...{
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                } else if (state is LoginErrorState) ...{
+                  Center(
+                    child: Text("error: ${state.error.toString()}"),
+                  )
+                },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

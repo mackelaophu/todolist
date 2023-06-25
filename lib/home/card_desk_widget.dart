@@ -24,12 +24,13 @@ class _DeskCardWidgetState extends State<DeskCardWidget> {
           borderRadius: BorderRadius.circular(10),
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
+              final bloc = context.read<HomeBloc>();
               return Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
-                children: List.generate(widget.desk.length, (index) {
+                children: List.generate(bloc.model.desk.length, (index) {
                   return TodoCardDragWidget(
-                      entity: widget.desk[index], index: index);
+                      entity: bloc.model.desk[index], index: index);
                 }),
               );
             },

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/home/card_desk_widget.dart';
 import 'package:to_do_list/home/home_bloc.dart';
-import 'package:to_do_list/home/to_do_list_card.dart';
-import 'package:to_do_list/login/login_response.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -67,6 +65,7 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
           child: Icon(
             Icons.add_circle_rounded,
+            color: Colors.white,
             size: 50,
           ),
         ),

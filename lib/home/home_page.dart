@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list/home/to_do_list_card.dart';
 import 'package:to_do_list/login/login_response.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
           automaticallyImplyLeading: false,
           title: const Text(
             "TODER LIST",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
           ),
           actions: const [
             InkWell(
@@ -31,20 +32,29 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           ]),
-      body: const Stack(
+      body: Stack(
         children: [
-          // BackgroudCurveWidget(),
+          Row(
+            children: [
+              const Spacer(),
+              ToDoCard(
+                entity: widget.loginEntity.data[3],
+              ),
+              const Spacer()
+            ],
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: "To Do",
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.currency_bitcoin),
             label: "Doing",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: "To Do",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.done),

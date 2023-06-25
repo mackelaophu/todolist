@@ -30,18 +30,26 @@ class ToDoEntity {
   final String task;
   final String des;
   final String status;
+  final String image;
   ToDoEntity(
       {required this.id,
       required this.task,
       required this.des,
-      required this.status});
+      required this.status,
+      required this.image});
 
   factory ToDoEntity.fromJson(Map<String, dynamic> json) => ToDoEntity(
       id: json['id'] as String,
       task: json['task'] as String,
       des: json['task'] as String,
-      status: json['status'] as String);
+      status: json['status'] as String,
+      image: json['image']);
 
-  Map<String, dynamic> toJson() =>
-      <String, dynamic>{'id': id, 'task': task, 'des': des, 'status': status};
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': id,
+        'task': task,
+        'des': des,
+        'status': status,
+        'image': image
+      };
 }

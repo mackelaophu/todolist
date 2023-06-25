@@ -7,11 +7,13 @@ sealed class HomeEvent extends Equatable {
 }
 
 final class HomeDragDoneEvent extends HomeEvent {
-  const HomeDragDoneEvent();
+  final int dragIndex;
+  const HomeDragDoneEvent({required this.dragIndex});
 }
 
 final class HomeDragDoingEvent extends HomeEvent {
-  const HomeDragDoingEvent();
+  final int dragIndex;
+  const HomeDragDoingEvent({required this.dragIndex});
 }
 
 final class HomeDragNoneEvent extends HomeEvent {

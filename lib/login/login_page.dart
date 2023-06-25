@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_list/home/home_bloc.dart';
+import 'package:to_do_list/home/home_model.dart';
 import 'package:to_do_list/home/home_page.dart';
+import 'package:to_do_list/home/home_state.dart';
 import 'package:to_do_list/login/first_time_login.dart';
 import 'package:to_do_list/login/login_bloc.dart';
 
@@ -21,7 +24,20 @@ class _LoginPageState extends State<LoginPage> {
         listener: (context, state) {
           if (state is LoginDismissLoadingState) {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => HomePage(loginEntity: state.data),
+                builder: (context) => BlocProvider(
+                      create: (context) => HomeBloc(
+                          model: HomeModel(
+                              desk: state.data.data
+                                  .where((element) => element.status == "todo")
+                                  .toList(),
+                              doingDesk: state.data.data
+                                  .where((element) => element.status == "doing")
+                                  .toList(),
+                              doneDesk: state.data.data
+                                  .where((element) => element.status == "done")
+                                  .toList())),
+                      child: HomePage(),
+                    ),
                 fullscreenDialog: true));
           }
         },

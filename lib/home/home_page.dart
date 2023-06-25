@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_list/home/card_desk_widget.dart';
+import 'package:to_do_list/home/home_bloc.dart';
 import 'package:to_do_list/home/to_do_list_card.dart';
 import 'package:to_do_list/login/login_response.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({required this.loginEntity, super.key});
-  final LoginEntity loginEntity;
+  const HomePage({super.key});
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -37,9 +39,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             children: [
               const Spacer(),
-              ToDoCard(
-                entity: widget.loginEntity.data[3],
-              ),
+              DeskCardWidget(desk: context.read<HomeBloc>().model.desk),
               const Spacer()
             ],
           ),

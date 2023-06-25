@@ -19,3 +19,5 @@ final class HomeDragDoingEvent extends HomeEvent {
 final class HomeDragNoneEvent extends HomeEvent {
   const HomeDragNoneEvent();
 }
+
+final class HomeRecoverDraggedEvent extends HomeEvent {}

@@ -41,7 +41,7 @@ class _TodoCardDragWidgetState extends State<TodoCardDragWidget> {
                                 child: Transform.rotate(
                                   angle: 12,
                                   child: TodoDragItemTagWidget(
-                                    text: 'DONE',
+                                    text: 'DOING',
                                     color: Colors.green[400]!,
                                   ),
                                 ),
@@ -52,7 +52,7 @@ class _TodoCardDragWidgetState extends State<TodoCardDragWidget> {
                                 child: Transform.rotate(
                                   angle: -12,
                                   child: TodoDragItemTagWidget(
-                                    text: 'DOING',
+                                    text: 'DONE',
                                     color: Colors.red[400]!,
                                   ),
                                 ),
@@ -67,14 +67,14 @@ class _TodoCardDragWidgetState extends State<TodoCardDragWidget> {
                 context
                     .read<HomeBloc>()
                     .add(HomeDragDoneEvent(dragIndex: widget.index));
-              }
-
-              if (details.delta.dx < 0 &&
+              } else if (details.delta.dx < 0 &&
                   details.globalPosition.dx <
                       MediaQuery.of(context).size.width / 2) {
                 context
                     .read<HomeBloc>()
                     .add(HomeDragDoingEvent(dragIndex: widget.index));
+              } else {
+                context.read<HomeBloc>().add(HomeRecoverDraggedEvent());
               }
             },
             onDragEnd: (drag) {

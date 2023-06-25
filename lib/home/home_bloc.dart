@@ -17,6 +17,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       model.removeItemAt(event.dragIndex, DragEvent.done);
       emit(HomeDragDoneState());
     });
+
+    on<HomeRecoverDraggedEvent>((event, emit) {
+      emit(HomeRecoverDraggedState());
+    });
+
     on<HomeDragNoneEvent>(
       (event, emit) => emit(HomeDragNoneState()),
     );

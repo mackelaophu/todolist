@@ -13,3 +13,5 @@ final class HomeDragDoneState extends HomeState {}
 final class HomeDragDoingState extends HomeState {}
 
 final class HomeDragNoneState extends HomeState {}
+
+final class HomeRecoverDraggedState extends HomeState {}

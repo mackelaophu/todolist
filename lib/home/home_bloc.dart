@@ -9,15 +9,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.model}) : super(HomeInitialState()) {
     on<HomeDragDoingEvent>(
       (event, emit) {
-        model.removeItemAt(event.dragIndex, DragEvent.doing);
         emit(HomeDragDoingState());
       },
     );
     on<HomeDragDoneEvent>((event, emit) {
-      model.removeItemAt(event.dragIndex, DragEvent.done);
       emit(HomeDragDoneState());
     });
-
     on<HomeRecoverDraggedEvent>((event, emit) {
       emit(HomeRecoverDraggedState());
     });

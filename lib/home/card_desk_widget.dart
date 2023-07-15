@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/home/drag_widget.dart';
 import 'package:to_do_list/home/home_bloc.dart';
-import 'package:to_do_list/login/login_response.dart';
-
+import 'package:to_do_list/home/home_event.dart';
 import 'home_state.dart';
 
 class DeskCardWidget extends StatefulWidget {
-  final List<ToDoEntity> desk;
-  const DeskCardWidget({super.key, required this.desk});
+  const DeskCardWidget({super.key});
 
   @override
   State<DeskCardWidget> createState() => _DeskCardWidgetState();
@@ -17,6 +15,7 @@ class DeskCardWidget extends StatefulWidget {
 class _DeskCardWidgetState extends State<DeskCardWidget> {
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<HomeBloc>();
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -53,9 +52,7 @@ class _DeskCardWidgetState extends State<DeskCardWidget> {
               );
             },
             onAccept: (int index) {
-              setState(() {
-                widget.desk.removeAt(index);
-              });
+              bloc.add(HomeDragDoingEvent(dragIndex: index));
             },
           ),
         ),
@@ -76,9 +73,7 @@ class _DeskCardWidgetState extends State<DeskCardWidget> {
               );
             },
             onAccept: (int index) {
-              setState(() {
-                widget.desk.removeAt(index);
-              });
+              bloc.add(HomeDragDoneEvent(dragIndex: index));
             },
           ),
         ),

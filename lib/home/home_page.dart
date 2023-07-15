@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/home/card_desk_widget.dart';
-import 'package:to_do_list/home/home_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,14 +30,10 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           ]),
-      body: Stack(
+      body: const Stack(
         children: [
           Row(
-            children: [
-              const Spacer(),
-              DeskCardWidget(desk: context.read<HomeBloc>().model.desk),
-              const Spacer()
-            ],
+            children: [Spacer(), DeskCardWidget(), Spacer()],
           ),
         ],
       ),

@@ -17,6 +17,9 @@ class HomeModel {
   }
 
   void removeItemAt(int id, DragEvent event) {
+    if (id >= desk.length) {
+      return;
+    }
     final item = desk[id];
     if (event == DragEvent.doing) {
       log("=>>>>>doing");

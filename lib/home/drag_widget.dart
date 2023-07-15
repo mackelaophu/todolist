@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list/home/home_bloc.dart';
 import 'package:to_do_list/home/home_event.dart';
+import 'package:to_do_list/home/home_model.dart';
 import 'package:to_do_list/home/to_do_list_card.dart';
 import 'package:to_do_list/home/todo_tag_drag_widget.dart';
 import 'package:to_do_list/login/login_response.dart';
@@ -23,6 +24,8 @@ class _TodoCardDragWidgetState extends State<TodoCardDragWidget> {
     return Center(
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
+          final bloc = context.read<HomeBloc>();
+          final id = bloc.model.desk.indexOf(widget.entity);
           return Draggable<int>(
             feedback: RotationTransition(
                 turns: state is! HomeDragNoneState
@@ -64,15 +67,11 @@ class _TodoCardDragWidgetState extends State<TodoCardDragWidget> {
               if (details.delta.dx > 0 &&
                   details.globalPosition.dx >
                       MediaQuery.of(context).size.width / 2) {
-                context
-                    .read<HomeBloc>()
-                    .add(HomeDragDoneEvent(dragIndex: widget.index));
+                bloc.model.removeItemAt(id, DragEvent.done);
               } else if (details.delta.dx < 0 &&
                   details.globalPosition.dx <
                       MediaQuery.of(context).size.width / 2) {
-                context
-                    .read<HomeBloc>()
-                    .add(HomeDragDoingEvent(dragIndex: widget.index));
+                bloc.model.removeItemAt(id, DragEvent.doing);
               } else {
                 context.read<HomeBloc>().add(HomeRecoverDraggedEvent());
               }
